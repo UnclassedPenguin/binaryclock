@@ -1,3 +1,16 @@
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//
+// Tyler(UnclassedPenguin) Binary Clock (tcell version) 2022
+//
+//      Author: Tyler(UnclassedPenguin)
+//         URL: https://unclassed.ca
+//      GitHub: https://github.com/UnclassedPenguin/scripts/
+// Description: I just wanted a simple binary clock. Now in Go!
+//
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
 package main
 
 import (
