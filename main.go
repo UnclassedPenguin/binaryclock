@@ -20,13 +20,6 @@ import (
   "github.com/gdamore/tcell/v2"
 )
 
-// This is used just to write strings to the screen.
-func writeToScreen(s tcell.Screen, style tcell.Style, x int, y int, str string) {
-  for i, char := range str {
-    s.SetContent(x+i, y, rune(char), []rune{}, style)
-  }
-}
-
 // Draw a box
 func drawBox(s tcell.Screen, style tcell.Style, x1, y1, x2, y2 int) {
   if y2 < y1 {
