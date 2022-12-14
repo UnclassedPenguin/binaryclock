@@ -71,21 +71,7 @@ func main() {
   y1 := y/2-3
   y2 := y/2+2
 
-
-  //s.SetContent(x/2-7+1, y/2+1, tcell.RuneBlock, []rune{}, style)
-  //s.SetContent(x/2-7+3, y/2+1, tcell.RuneBlock, []rune{}, style)
-  //s.SetContent(x/2-7+5, y/2+1, tcell.RuneBlock, []rune{}, style)
-  //s.SetContent(x/2-7+7, y/2+1, tcell.RuneBlock, []rune{}, style)
-
-  //s.SetContent(x/2-7+9, y/2+1, tcell.RuneBlock, []rune{}, style)
-  //s.SetContent(x/2-7+11, y/2+1, tcell.RuneBlock, []rune{}, style)
-
-  //writeToScreen(s, style, i, j, string(tcell.RuneBlock))
-
-  //writeToScreen(s, style, x/2-4, y/2, "Welcome")
-
-  s.Sync()
-
+  // Handles keyboard input. ctrl-c, q, or esc to quit.
   go func() {
     for {
     switch ev := s.PollEvent().(type) {
@@ -107,6 +93,7 @@ func main() {
     }
   }()
 
+  // Main loop
   for {
     timeArr := ReturnTime()
 
@@ -137,15 +124,12 @@ func main() {
 
     // Minutes
     // Tens position
-    //line4[2] = string(currentMinuteBin0[7])
     if timeArr[3][2] == "1" {
       s.SetContent(x/2-7+5, y/2+1, tcell.RuneDiamond, []rune{}, style)
     }
-    //line3[2] = string(currentMinuteBin0[6])
     if timeArr[2][2] == "1" {
       s.SetContent(x/2-7+5, y/2, tcell.RuneDiamond, []rune{}, style)
     }
-    //line2[2] = string(currentMinuteBin0[5])
     if timeArr[1][2] == "1" {
       s.SetContent(x/2-7+5, y/2-1, tcell.RuneDiamond, []rune{}, style)
     }
@@ -177,21 +161,15 @@ func main() {
     }
 
     // Ones position
-    //line4[5] = string(currentSecondBin1[7])
     if timeArr[3][5] == "1" {
       s.SetContent(x/2-7+11, y/2+1, tcell.RuneDiamond, []rune{}, style)
     }
-    //line3[5] = string(currentSecondBin1[6])
     if timeArr[2][5] == "1" {
       s.SetContent(x/2-7+11, y/2, tcell.RuneDiamond, []rune{}, style)
     }
-
-    //line2[5] = string(currentSecondBin1[5])
     if timeArr[1][5] == "1" {
       s.SetContent(x/2-7+11, y/2-1, tcell.RuneDiamond, []rune{}, style)
     }
-
-    //line1[5] = string(currentSecondBin1[4])
     if timeArr[0][5] == "1" {
       s.SetContent(x/2-7+11, y/2-2, tcell.RuneDiamond, []rune{}, style)
     }
