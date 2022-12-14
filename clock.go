@@ -40,7 +40,8 @@ func getTime() (string, string, string) {
 
 // Takes a single digit, and returns a binary value with all the leading zeros.
 // ie, takes 7, returns 00000111
-func getBinary(num int) string {
+func getBinary(str string) string {
+  num, _ := strconv.Atoi(str)
   binary := fmt.Sprintf("%08b", num)
   return binary
 }
@@ -58,54 +59,19 @@ func ReturnTime() [][]string {
   // For example: if it is 2 o'clock in the afternoon, or 14 rather,
   // currentHourString0 will be 1, currentHourString1 will be 4
   // currentHourBin0 will be 00000001, currentHourBin1 will be 00000100
-  currentHourString0 := string(currentHourString[0])
-  currentHourInt0, _ := strconv.Atoi(currentHourString0)
-  currentHourBin0 := getBinary(currentHourInt0)
+  currentHourBin0 := getBinary(string(currentHourString[0]))
 
-  currentHourString1 := string(currentHourString[1])
-  currentHourInt1, _ := strconv.Atoi(currentHourString1)
-  currentHourBin1 := getBinary(currentHourInt1)
+  currentHourBin1 := getBinary(string(currentHourString[1]))
 
   // Same as above, but for Minutes
-  currentMinuteString0 := string(currentMinuteString[0])
-  currentMinuteInt0, _ := strconv.Atoi(currentMinuteString0)
-  currentMinuteBin0 := getBinary(currentMinuteInt0)
+  currentMinuteBin0 := getBinary(string(currentMinuteString[0]))
 
-  currentMinuteString1 := string(currentMinuteString[1])
-  currentMinuteInt1, _ := strconv.Atoi(currentMinuteString1)
-  currentMinuteBin1 := getBinary(currentMinuteInt1)
+  currentMinuteBin1 := getBinary(string(currentMinuteString[1]))
 
   // Same as above, but for Seconds
-  currentSecondString0 := string(currentSecondString[0])
-  currentSecondInt0, _ := strconv.Atoi(currentSecondString0)
-  currentSecondBin0 := getBinary(currentSecondInt0)
+  currentSecondBin0 := getBinary(string(currentSecondString[0]))
 
-  currentSecondString1 := string(currentSecondString[1])
-  currentSecondInt1, _ := strconv.Atoi(currentSecondString1)
-  currentSecondBin1 := getBinary(currentSecondInt1)
-
-  // Diagnostics printing
-  //fmt.Print(currentHourString)
-  //fmt.Print(":")
-  //fmt.Print(currentMinuteString)
-  //fmt.Print(":")
-  //fmt.Print(currentSecondString)
-  //fmt.Print("\n")
-  //fmt.Println("Current Hour String: ", currentHourString)
-  //fmt.Println("Current Hour String 0: ", currentHourString0)
-  //fmt.Println("Current Hour String 1: ", currentHourString1)
-  //fmt.Println("Current Hour Bin 0: ", currentHourBin0)
-  //fmt.Println("Current Hour Bin 1: ", currentHourBin1)
-  //fmt.Println("Current Minute String: ", currentMinuteString)
-  //fmt.Println("Current Minnute String 0: ", currentMinuteString0)
-  //fmt.Println("Current Minute String 1: ", currentMinuteString1)
-  //fmt.Println("Current Minute Bin 0: ", currentMinuteBin0)
-  //fmt.Println("Current Minute Bin 1: ", currentMinuteBin1)
-  //fmt.Println("Current Second String: ", currentSecondString)
-  //fmt.Println("Current Second String 0: ", currentSecondString0)
-  //fmt.Println("Current Second String 1: ", currentSecondString1)
-  //fmt.Println("Current Second Bin 0: ", currentSecondBin0)
-  //fmt.Println("Current Second Bin 1: ", currentSecondBin1)
+  currentSecondBin1 := getBinary(string(currentSecondString[1]))
 
   // These are the arrays where the values are changed and the time is shown
   var line1 = []string{" ","0"," ","0"," ","0"}
