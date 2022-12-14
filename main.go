@@ -29,21 +29,6 @@ func drawBox(s tcell.Screen, style tcell.Style, x1, y1, x2, y2 int) {
     x1, x2 = x2, x1
   }
 
-  for col := x1; col <= x2; col++ {
-    s.SetContent(col, y1, tcell.RuneHLine, nil, style)
-    s.SetContent(col, y2, tcell.RuneHLine, nil, style)
-  }
-  for row := y1 + 1; row < y2; row++ {
-    s.SetContent(x1, row, tcell.RuneVLine, nil, style)
-    s.SetContent(x2, row, tcell.RuneVLine, nil, style)
-  }
-  if y1 != y2 && x1 != x2 {
-    // Only add corners if we need to
-    s.SetContent(x1, y1, tcell.RuneULCorner, nil, style)
-    s.SetContent(x2, y1, tcell.RuneURCorner, nil, style)
-    s.SetContent(x1, y2, tcell.RuneLLCorner, nil, style)
-    s.SetContent(x2, y2, tcell.RuneLRCorner, nil, style)
-  }
 }
 
 func main() {
@@ -59,21 +44,6 @@ func main() {
 
   style := tcell.StyleDefault.Foreground(tcell.ColorWhite)
 
-  x, y := s.Size()
-
-  if x < 16 || y < 6 {
-    s.Fini()
-    fmt.Println("Terminal too small")
-    fmt.Println("Must be at least 16x6")
-    fmt.Println("Resize and retry")
-    os.Exit(1)
-  }
-
-  // Corners of the box to draw.
-  x1 := x/2-8
-  x2 := x/2+6
-  y1 := y/2-3
-  y2 := y/2+2
 
   // Handles keyboard input. ctrl-c, q, or esc to quit.
   go func() {
@@ -99,11 +69,53 @@ func main() {
 
   // Main loop
   for {
-    timeArr := ReturnTime()
-
+    // Clear screen to start fresh
     s.Clear()
 
-    drawBox(s, style, x1, y1, x2, y2)
+    // Get time from clock.go
+    // It comes in an array of arrays 
+    // timeArr = [][]string{
+    //      {" ","0"," ","0"," ","0"},
+    //      {" ","0","0","0","0","0"},
+    //      {"0","0","0","0","0","0"},
+    //      {"0","0","0","0","0","0"},
+    // }
+    timeArr := ReturnTime()
+
+    // Get size of terminal
+    x, y := s.Size()
+
+    // If terminal is too small to show, exit.
+    if x < 16 || y < 6 {
+      s.Fini()
+      fmt.Println("Terminal too small")
+      fmt.Println("Must be at least 16x6")
+      fmt.Println("Resize and retry")
+      os.Exit(1)
+    }
+
+    // Corners of the box to draw.
+    x1 := x/2-8
+    x2 := x/2+6
+    y1 := y/2-3
+    y2 := y/2+2
+
+    // Draw the box
+    for col := x1; col <= x2; col++ {
+      s.SetContent(col, y1, tcell.RuneHLine, nil, style)
+      s.SetContent(col, y2, tcell.RuneHLine, nil, style)
+    }
+    for row := y1 + 1; row < y2; row++ {
+      s.SetContent(x1, row, tcell.RuneVLine, nil, style)
+      s.SetContent(x2, row, tcell.RuneVLine, nil, style)
+    }
+    if y1 != y2 && x1 != x2 {
+      // Only add corners if we need to
+      s.SetContent(x1, y1, tcell.RuneULCorner, nil, style)
+      s.SetContent(x2, y1, tcell.RuneURCorner, nil, style)
+      s.SetContent(x1, y2, tcell.RuneLLCorner, nil, style)
+      s.SetContent(x2, y2, tcell.RuneLRCorner, nil, style)
+    }
 
     // Hour
     // Tens position
@@ -180,6 +192,7 @@ func main() {
       s.SetContent(x/2-7+11, y/2-2, tcell.RuneDiamond, []rune{}, style)
     }
 
+    // Sync to show updates.
     s.Sync()
     time.Sleep(time.Second * 1)
   }
