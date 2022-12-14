@@ -57,8 +57,6 @@ func main() {
     os.Exit(1)
   }
 
-  s.Clear()
-
   style := tcell.StyleDefault.Foreground(tcell.ColorWhite)
 
   x, y := s.Size()
@@ -102,6 +100,8 @@ func main() {
   // Main loop
   for {
     timeArr := ReturnTime()
+
+    s.Clear()
 
     drawBox(s, style, x1, y1, x2, y2)
 
@@ -182,6 +182,5 @@ func main() {
 
     s.Sync()
     time.Sleep(time.Second * 1)
-    s.Clear()
   }
 }
