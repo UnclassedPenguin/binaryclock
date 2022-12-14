@@ -183,6 +183,6 @@ func main() {
 
     // Sync to show updates.
     s.Sync()
-    time.Sleep(time.Second * 1)
+    time.Sleep(time.Millisecond * 200)
   }
 }
