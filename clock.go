@@ -54,10 +54,11 @@ func ReturnTime() [][]string {
   // Takes the current hour and splits it into two individual characters
   // These are each then passed to the getBinary function to get the
   // binary value of them, and stores it. 
-  // currentHourString0 is the tens position of the hour
-  // currentHourString1 is the ones position of the hour
-  // For example: if it is 2 o'clock in the afternoon, or 14 rather,
-  // currentHourString0 will be 1, currentHourString1 will be 4
+  // currentHourBin0 is the tens position of the hour
+  // currentHourBin1 is the ones position of the hour
+  // For example: if it is 2 o'clock in the afternoon, 
+  // (or 14 rather, since this is a 24 hour clock)
+  // currentHourString[0] will be 1, currentHourString[1] will be 4
   // currentHourBin0 will be 00000001, currentHourBin1 will be 00000100
   currentHourBin0 := getBinary(string(currentHourString[0]))
 
@@ -74,6 +75,8 @@ func ReturnTime() [][]string {
   currentSecondBin1 := getBinary(string(currentSecondString[1]))
 
   // These are the arrays where the values are changed and the time is shown
+  // It is a visually representation of the time.
+  //                    H   H : M   M : S   S
   var line1 = []string{" ","0"," ","0"," ","0"}
   var line2 = []string{" ","0","0","0","0","0"}
   var line3 = []string{"0","0","0","0","0","0"}
