@@ -20,17 +20,6 @@ import (
   "github.com/gdamore/tcell/v2"
 )
 
-// Draw a box
-func drawBox(s tcell.Screen, style tcell.Style, x1, y1, x2, y2 int) {
-  if y2 < y1 {
-    y1, y2 = y2, y1
-  }
-  if x2 < x1 {
-    x1, x2 = x2, x1
-  }
-
-}
-
 func main() {
   s, err := tcell.NewScreen()
   if err != nil {
